@@ -1,0 +1,52 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/styles.css')}}">
+{% endblock %}
+
+{% block title %}Cafes{% endblock %}
+
+{% block content %}
+
+  <!-- Page Header -->
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Cafes</h1>
+            <span class="subheading">A collection of cafes.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for cafe in all_cafes %}
+        <div class="cafe-preview">
+          <img src="{{cafe.img_url}}">
+          <a href="{{ url_for('show_cafe', index=cafe.id) }}">
+            <h2 class="cafe-title">
+              {{cafe.name}}
+            </h2>
+            <h3 class="cafe-subtitle">
+              {{cafe.location}}
+            </h3>
+          </a>
+<!--            <a href="{{url_for('delete_cafe', cafe_id=cafe.id)}}">✘</a>-->
+        </div>
+        <hr>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <hr>
+
+{% endblock %}
